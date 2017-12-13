@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:theme="@style/AppTheme">
+
+    <TextView
+            android:text="@string/arrange_a_time"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/time_text"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="monospace"
+            android:textSize="14sp"/>
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:srcCompat="@color/colorAccent"
+            android:id="@+id/imageView3"
+            android:layout_weight="1"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+        <TextView
+                android:text="@string/as_soon_as_possible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/asSoonAsPossibleText"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
+                android:fontFamily="monospace"
+                android:textAlignment="center"/>
+
+        <CheckBox
+                android:layout_height="wrap_content"
+                android:id="@+id/checkBoxAsSoonAsPossible"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"/>
+    </LinearLayout>
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:srcCompat="@color/colorAccent"
+            android:id="@+id/imageView7"
+            android:layout_weight="1"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        <NumberPicker
+                android:id="@+id/datePicker"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:descendantFocusability="blocksDescendants">
+        </NumberPicker>
+
+        <NumberPicker
+                android:id="@+id/hourPicker"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:descendantFocusability="blocksDescendants">
+        </NumberPicker>
+
+        <NumberPicker
+                android:id="@+id/minutePicker"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:descendantFocusability="blocksDescendants">
+        </NumberPicker>
+
+    </LinearLayout>
+
+    <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateInformationTextView"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:gravity="center"/>
+
+    <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/comingAfterTimeTextView"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+    <Button
+            android:text="@string/ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/okButton3"
+            android:layout_weight="1"
+            style="@style/Widget.AppCompat.Button.Colored"/>
+
+</LinearLayout>

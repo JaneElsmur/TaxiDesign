@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Такси</string>
+    <string name="open_sandwich_menu">Open sandwich menu</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+
+    <string name="title_activity_main">Заказ такси</string>
+    <string name="title_profile">Профиль</string>
+
+    <string name="order">Заказ такси</string>
+    <string name="profile">Профиль</string>
+    <string name="bank_card">Банковская карта</string>
+    <string name="favorite_addresses">Любимые адреса</string>
+    <string name="communication">Коммуникация</string>
+    <string name="i_have_a_problem">У меня проблема</string>
+    <string name="operator_call">Звонок оператору</string>
+    <string name="feedback">Оставить отзыв</string>
+    <string name="policy">Политика конф.</string>
+
+    <string name="tariff_dialog_title">Тарифф</string>
+    <string name="wishes_dialog_title">Пожелания</string>
+    <string name="time_dialog_title">Время</string>
+    <string name="favorites_dialog_title">Любимые адреса</string>
+
+    <string name="i_don_t_speak_russian">I don\'t speak Russian</string>
+    <string name="app_language">Язык приложения:</string>
+    <string name="telephone">Телефон:</string>
+    <string name="change_user">Сменить пользователя</string>
+    <string name="tariff_information">Тарифы могут отличаться стоймостью и способом рассчета (фиксированная сумма или по счетчику). Подробности Вы можете уточнить у оператора</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">Ок</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
+
+    <string-array name="language_list">
+        <item>Русский</item>
+        <item>English</item>
+    </string-array>
+
+    <string name="under_construction">В разработке</string>
+    <string name="wishes_hello_text">Выберите, какой способ оплаты будет удобен, а так же важные для Вас опции, а мы обо всём позаботимся :)</string>
+    <string name="ready_money">Наличные</string>
+    <string name="payment_way">Способ оплаты</string>
+    <string name="by_sberbank_online">Через \"Сбербанк Онлайн\"</string>
+    <string name="by_bank_card">Банковская карта (в разработке)</string>
+    <string name="I_need_change">Нужна сдача</string>
+    <string name="non_smoking">Некурящий салон</string>
+    <string name="baby_car_seat">Детское автокресло</string>
+    <string name="pet_transportation">Провоз животного</string>
+    <string name="I_need_empty_trunk">Нужен пустой багажник</string>
+    <string name="wagon">Нужен универсал</string>
+    <string name="arrange_a_time">Назначьте время</string>
+    <string name="as_soon_as_possible">Как можно скорее</string>
+    <string name="from">Откуда</string>
+    <string name="where">Куда</string>
+    <string name="trunk">Багаж</string>
+    <string name="add_address">Добавить адресс</string>
+    <string name="remove_address">Убрать адресс</string>
+    <string name="title_activity_enter_location">EnterLocation</string>
+    <string name="address_entering">Ввод адреса</string>
+    <string name="search">Поиск</string>
+
+</resources>

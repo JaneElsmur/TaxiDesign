@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".fragments.FragmentFrom"
+              android:orientation="horizontal"
+              android:clickable="true"
+              android:id="@+id/fromButton">
+
+    <ImageView
+            android:layout_width="10dp"
+            android:layout_height="55dp"
+            app:srcCompat="@color/colorPrimaryDark"
+            android:id="@+id/imageView6"
+            />
+
+    <TextView
+            android:hint="@string/from"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:id="@+id/fromEditText"
+            android:textAlignment="center"
+            android:fontFamily="monospace"
+            android:textSize="16sp"
+            android:selectAllOnFocus="false"
+            android:maxLines="1"
+            android:gravity="center"/>
+</LinearLayout>

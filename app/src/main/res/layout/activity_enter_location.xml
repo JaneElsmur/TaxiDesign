@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="janeelsmur.taxi.EnterLocation">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
+
+        <ImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                app:srcCompat="?attr/actionModeCloseDrawable"
+                android:id="@+id/backButton"
+                style="?attr/borderlessButtonStyle"
+                android:scaleType="fitCenter"
+                android:backgroundTint="@android:color/transparent"
+                android:tint="@android:color/white"/>
+
+        <TextView
+                android:text="@string/address_entering"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+    </android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+            android:id="@+id/search_field"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="56dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            tools:layout_editor_absoluteY="25dp"
+            tools:layout_editor_absoluteX="8dp">
+
+        <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <ImageView
+            android:layout_alignTop="@+id/favoritesButton"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:srcCompat="@android:color/darker_gray"
+            android:id="@+id/border"/>
+
+    <ImageView
+            android:layout_alignBottom="@+id/favoritesButton"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:srcCompat="@android:color/darker_gray"
+            android:id="@+id/border2"/>
+
+    <LinearLayout
+            android:clickable="true"
+            android:id="@+id/favoritesButton"
+            android:layout_below="@+id/search_field"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+        <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/heart"
+                android:id="@+id/heartImage"
+                android:scaleType="centerCrop"
+                android:visibility="visible"
+                />
+
+        <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/favorite_addresses"
+                android:ems="10"
+                android:id="@+id/editText2"
+                tools:layout_editor_absoluteY="25dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:selectAllOnFocus="false"
+                android:visibility="visible"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_weight="0.19"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="400dp"
+              android:orientation="vertical"
+              android:weightSum="1">
+
+    <TextView
+            android:text="@string/wishes_hello_text"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:id="@+id/wishes_text"
+            android:textAlignment="center"
+            android:fontFamily="monospace"
+            android:textSize="15sp"
+            android:layout_weight="0.08"
+            android:gravity="center"
+            android:lineSpacingExtra="4sp"
+            android:textAllCaps="false"/>
+
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="299dp"
+            android:scrollbars="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/colorLine1"/>
+
+            <TextView
+                    android:text="@string/payment_way"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:id="@+id/textView2"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif"/>
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/colorLine2"/>
+
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"/>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/ready_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/readyMoneyText"
+                            android:gravity=""
+                            android:fontFamily="monospace"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/readyMoneyRadioButton"
+                            android:checked="true"/>
+
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/by_sberbank_online"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/SberbankOnlineText"
+                            android:fontFamily="monospace"
+                            android:gravity=""
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/sberbankOnlineRadioButton"
+                            />
+
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/by_bank_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bankCardText"
+                            android:fontFamily="monospace"
+                            android:gravity=""
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/bankCardRadioButton"
+                            android:visibility="invisible"
+                            android:clickable="false"
+                            />
+
+                </TableRow>
+
+
+            </TableLayout>
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/colorLine3"/>
+
+            <TextView
+                    android:text="Опции"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:id="@+id/textView5"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/imageView5"/>
+
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"/>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/I_need_change"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/changeNeededText"
+                            android:gravity=""
+                            android:fontFamily="monospace"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/changeNeededCheckBox"
+                            />
+
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/non_smoking"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/nonSmokingText"
+                            android:fontFamily="monospace"
+                            android:gravity=""
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/nonSmokingCheckBox"
+                            />
+
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/pet_transportation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/petText"
+                            android:fontFamily="monospace"
+                            android:gravity=""
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/petTransportationCheckBox"
+                            />
+
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                    android:text="@string/trunk"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:id="@+id/textView6"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/imageView10"
+                    android:layout_weight="1"/>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/I_need_empty_trunk"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/emptyTrunkText"
+                            android:fontFamily="monospace"
+                            android:gravity=""
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/emptyTrunkCheckBox"
+                            />
+
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="@string/wagon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/wagonText"
+                            android:fontFamily="monospace"
+                            android:gravity=""
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/wagonCheckBox"
+                            />
+
+                </TableRow>
+            </TableLayout>
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@color/colorAccent"
+                    android:id="@+id/imageView9"
+                    android:layout_weight="1"/>
+
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"/>
+
+                    <TextView
+                            android:text="I don't speak Russian"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/notRusText"
+                            android:fontFamily="monospace"
+                            android:gravity=""
+                            android:layout_weight="1"
+                            android:textColor="@android:color/background_dark"/>
+
+                    <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/notRusCheckBox"
+                            />
+
+                </TableRow>
+
+
+            </TableLayout>
+
+            <Button
+                    android:text="@string/ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/okButton2"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/order"
+                android:icon="@drawable/sandwich_icon"
+                android:checked="true"
+                android:title="@string/order"/>
+        <item
+                android:id="@+id/profile"
+                android:icon="@drawable/sandwich_icon"
+                android:title="@string/profile"/>
+        <item
+                android:id="@+id/favorite_addresses"
+                android:icon="@drawable/sandwich_icon"
+                android:title="@string/favorite_addresses"/>
+        <item
+                android:id="@+id/bank_card"
+                android:icon="@drawable/sandwich_icon"
+                android:title="@string/bank_card"/>
+    </group>
+
+    <item android:title="@string/communication">
+        <menu>
+            <item
+                    android:id="@+id/i_have_a_problem"
+                    android:icon="@drawable/sandwich_icon"
+                    android:title="@string/i_have_a_problem"/>
+            <item
+                    android:id="@+id/call_to_operator"
+                    android:icon="@drawable/sandwich_icon"
+                    android:title="@string/operator_call"/>
+            <item
+                    android:id="@+id/feedback"
+                    android:icon="@drawable/sandwich_icon"
+                    android:title="@string/feedback"/>
+            <item
+                    android:id="@+id/policy"
+                    android:icon="@drawable/sandwich_icon"
+                    android:title="@string/policy"/>
+        </menu>
+    </item>
+</menu>

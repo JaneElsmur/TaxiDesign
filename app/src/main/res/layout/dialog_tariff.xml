@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              tools:context="janeelsmur.taxi.DialogTariff">
+
+    <TextView
+            android:text="@string/tariff_information"
+            android:layout_width="264dp"
+            android:layout_height="95dp"
+            android:id="@+id/tariff_text"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:lineSpacingExtra="0sp"
+            />
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:srcCompat="@color/colorAccent"
+            android:id="@+id/imageView2"/>
+
+    <RadioButton
+            android:layout_gravity="center"
+            android:text="Тариф 1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonTariff1"
+            android:layout_weight="0.52"
+            android:checked="true"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            />
+
+    <RadioButton
+            android:layout_gravity="center"
+            android:text="Тариф 2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonTariff2"
+            android:layout_weight="1"
+            android:fontFamily="monospace"
+            />
+
+    <RadioButton
+            android:layout_gravity="center"
+            android:text="Тариф 3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonTariff3"
+            android:fontFamily="monospace"/>
+
+    <RadioButton
+            android:layout_gravity="center"
+            android:text="Тариф 4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonTariff4"
+            android:layout_weight="1"
+            android:fontFamily="monospace"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button
+                android:text="@string/ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/okButton"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+    </LinearLayout>
+
+</LinearLayout>
