@@ -62,5 +62,9 @@
     <string name="title_activity_enter_location">EnterLocation</string>
     <string name="address_entering">Ввод адреса</string>
     <string name="search">Поиск</string>
+    <string name="your_comment">Ваш комментарий</string>
+    <string name="send">Отправить</string>
+    <string name="need_baby_chair">Нужно детское кресло</string>
+    <string name="yes">Да</string>
 
 </resources>

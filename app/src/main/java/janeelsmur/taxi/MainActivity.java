@@ -1,6 +1,7 @@
 package janeelsmur.taxi;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import janeelsmur.taxi.fragments.FragmentFeedback;
 import janeelsmur.taxi.fragments.FragmentMainScreen;
 import janeelsmur.taxi.fragments.FragmentProfile;
 import janeelsmur.taxi.fragments.FragmentUnderConstruction;
@@ -19,7 +21,10 @@ public class MainActivity extends AppCompatActivity
     private FragmentMainScreen mainScreen;
     private FragmentProfile profile;
     private FragmentUnderConstruction underConstruction;
+    private FragmentFeedback feedback;
     private Toolbar toolbar;
+
+    private final DialogFragment callOperatorDialog = new DialogCallOperator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         mainScreen = new FragmentMainScreen();
         profile = new FragmentProfile();
         underConstruction = new FragmentUnderConstruction();
+        feedback = new FragmentFeedback();
 
         // Инициализация всей навигационной панели и кнопки её вывода на тулбаре
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -100,14 +106,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.i_have_a_problem) {
 
         } else if (id == R.id.call_to_operator) {
-
-            if (getSupportFragmentManager().findFragmentById(R.id.container) != underConstruction) {
-                toolbar.setTitle(R.string.operator_call);
-                transaction.replace(R.id.container, underConstruction);
-            }
+            callOperatorDialog.show(getSupportFragmentManager(), "CallOperatorDialog");
 
         } else if (id == R.id.feedback) {
-
+            if (getSupportFragmentManager().findFragmentById(R.id.container) != feedback) {
+                toolbar.setTitle(R.string.feedback);
+                transaction.replace(R.id.container, feedback);
+            }
         } transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

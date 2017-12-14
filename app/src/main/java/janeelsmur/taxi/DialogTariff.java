@@ -23,6 +23,7 @@ public class DialogTariff extends DialogFragment implements OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_tariff, null);
 
@@ -100,6 +101,7 @@ public class DialogTariff extends DialogFragment implements OnClickListener {
         dismiss();
     }
 
+    @Override
     public void onDismiss(DialogInterface dialog){
         super.onDismiss(dialog);
         //сохранение отмеченных полей в БД

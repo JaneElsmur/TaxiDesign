@@ -31,14 +31,18 @@
                     android:id="@+id/call_to_operator"
                     android:icon="@drawable/sandwich_icon"
                     android:title="@string/operator_call"/>
+
+            <group android:checkableBehavior="single">
             <item
                     android:id="@+id/feedback"
                     android:icon="@drawable/sandwich_icon"
                     android:title="@string/feedback"/>
+
             <item
                     android:id="@+id/policy"
                     android:icon="@drawable/sandwich_icon"
                     android:title="@string/policy"/>
+            </group>
         </menu>
     </item>
 </menu>

@@ -11,10 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import janeelsmur.taxi.DialogTariff;
-import janeelsmur.taxi.DialogTime;
-import janeelsmur.taxi.DialogWishes;
-import janeelsmur.taxi.R;
+import janeelsmur.taxi.*;
 
 
 public class FragmentMainScreen extends Fragment implements OnClickListener{
@@ -33,7 +30,8 @@ public class FragmentMainScreen extends Fragment implements OnClickListener{
     private LinearLayout addButton;
     private LinearLayout removeButton;
 
-    //Количество кладок "куда". Обновляется при убийстве процесса на это значение
+    //Если хранить в массиве, то данные в нем сохраняются после закрытия фрагмента
+    //Количество кладок "куда". Обновляется при убийстве процесса на это значение (пока что, позже будет храниться в БД)
     private short locationsCount = 1;
 
     @Override
@@ -46,8 +44,8 @@ public class FragmentMainScreen extends Fragment implements OnClickListener{
                 .add(R.id.locations_container, from, "first added1")
                 .commit();
 
-
-        FragmentWhere where[] = new FragmentWhere[locationsCount];
+        //ВРЕМЕННО, ПОКА НЕТ БД
+            FragmentWhere where[] = new FragmentWhere[locationsCount];
         for (short count = 0; count < locationsCount; count++) {
             where[count] = new FragmentWhere();
             getFragmentManager()

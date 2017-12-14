@@ -11,7 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class DialogTime extends DialogFragment implements View.OnClickListener {
@@ -36,7 +35,7 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
     private final String[] displayedTimeValues = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
     private final String[] displayedDateValues = new String[7];
 
-    //Сохраняемые данные (Пока не работает, нужна база данных)
+    //Сохраняемые данные
     private final short DATA_INDEX = 0;
     private final short HOURS_INDEX = 1;
     private final short MINUTES_INDEX = 2;
