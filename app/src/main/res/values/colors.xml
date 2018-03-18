@@ -7,4 +7,7 @@
     <item name="lightBlue" type="color">#4ac6f3</item>
     <item name="purple" type="color">#ce4af3</item>
     <item name="almostTransparent" type="color">#32ffffff</item>
+    <item name="white" type="color">#ffffff</item>
+    <color name="colorPrimaryDarkTransparent">#1bff9100</color>
+
 </resources>

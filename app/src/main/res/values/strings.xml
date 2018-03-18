@@ -1,4 +1,7 @@
 <resources>
+
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyA0td5i5OF9IdmMR7-W1VaXZqFXbo70a9Q</string>
+
     <string name="app_name">Такси</string>
     <string name="open_sandwich_menu">Open sandwich menu</string>
 
@@ -13,7 +16,7 @@
     <string name="order">Заказ такси</string>
     <string name="profile">Профиль</string>
     <string name="bank_card">Банковская карта</string>
-    <string name="favorite_addresses">Любимые адреса</string>
+    <string name="favorite_addresses">Избранные адреса</string>
     <string name="communication">Коммуникация</string>
     <string name="i_have_a_problem">У меня проблема</string>
     <string name="operator_call">Звонок оператору</string>
@@ -29,7 +32,9 @@
     <string name="app_language">Язык приложения:</string>
     <string name="telephone">Телефон:</string>
     <string name="change_user">Сменить пользователя</string>
-    <string name="tariff_information">Тарифы могут отличаться стоймостью и способом рассчета (фиксированная сумма или по счетчику). Подробности Вы можете уточнить у оператора</string>
+    <string name="tariff_information">Тарифы могут отличаться стоймостью и способом рассчета (фиксированная сумма или по
+        счетчику). Подробности Вы можете уточнить у оператора
+    </string>
     <string name="cancel">Отмена</string>
     <string name="ok">Ок</string>
     <string name="today">Сегодня</string>
@@ -41,7 +46,9 @@
     </string-array>
 
     <string name="under_construction">В разработке</string>
-    <string name="wishes_hello_text">Выберите, какой способ оплаты будет удобен, а так же важные для Вас опции, а мы обо всём позаботимся :)</string>
+    <string name="wishes_hello_text">Выберите, какой способ оплаты будет удобен, а так же важные для Вас опции, а мы обо
+        всём позаботимся :)
+    </string>
     <string name="ready_money">Наличные</string>
     <string name="payment_way">Способ оплаты</string>
     <string name="by_sberbank_online">Через \"Сбербанк Онлайн\"</string>
@@ -57,8 +64,8 @@
     <string name="from">Откуда</string>
     <string name="where">Куда</string>
     <string name="trunk">Багаж</string>
-    <string name="add_address">Добавить адресс</string>
-    <string name="remove_address">Убрать адресс</string>
+    <string name="add_address">Добавить адрес</string>
+    <string name="remove_address">Убрать адрес</string>
     <string name="title_activity_enter_location">EnterLocation</string>
     <string name="address_entering">Ввод адреса</string>
     <string name="search">Поиск</string>
@@ -66,5 +73,11 @@
     <string name="send">Отправить</string>
     <string name="need_baby_chair">Нужно детское кресло</string>
     <string name="yes">Да</string>
+    <string name="from_short">Из:</string>
+    <string name="where_short">До:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

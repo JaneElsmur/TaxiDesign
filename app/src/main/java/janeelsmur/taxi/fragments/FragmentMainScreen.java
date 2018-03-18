@@ -1,5 +1,6 @@
 package janeelsmur.taxi.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -12,11 +13,18 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import janeelsmur.taxi.*;
+import janeelsmur.taxi.Utilites.SharedPrefManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 
-public class FragmentMainScreen extends Fragment implements OnClickListener{
+public class FragmentMainScreen extends Fragment implements OnClickListener {
 
     private final short MAX_LOCATIONS = 5; //Максимальное число фрагментов "куда"
+    private SharedPrefManager sharedPrefManager;
 
     //Диалоговые окна
     private final DialogFragment tariffDialog = new DialogTariff(); //Инициализация здесь позволяет сохранять отмеченный checkBox
@@ -26,99 +34,139 @@ public class FragmentMainScreen extends Fragment implements OnClickListener{
     //Кнопки
     private ImageButton tariffButton;
     private ImageButton wishesButton;
-    private ImageButton timeButton;
     private LinearLayout addButton;
+    private ImageButton timeButton;
     private LinearLayout removeButton;
 
-    //Если хранить в массиве, то данные в нем сохраняются после закрытия фрагмента
-    //Количество кладок "куда". Обновляется при убийстве процесса на это значение (пока что, позже будет храниться в БД)
-    private short locationsCount = 1;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        FragmentFrom from = new FragmentFrom();
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.locations_container, from, "first added1")
-                .commit();
-
-        //ВРЕМЕННО, ПОКА НЕТ БД
-            FragmentWhere where[] = new FragmentWhere[locationsCount];
-        for (short count = 0; count < locationsCount; count++) {
-            where[count] = new FragmentWhere();
-            getFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.locations_container, where[count], "first added2")
-                    .commit();
-        }
-    }
+    //Список c фрагментами
+    private ArrayList<FragmentLocation> fragmentLocations = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main_screen, null);
-    }
+        View view = inflater.inflate(R.layout.fragment_main_screen, null);
+        sharedPrefManager = new SharedPrefManager(getContext());
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        //Инициализация кнопок и установка слушателей
-        tariffButton = getActivity().findViewById(R.id.tariffButton);
-        wishesButton = getActivity().findViewById(R.id.wishesButton);
-        timeButton = getActivity().findViewById(R.id.whenButton);
-        addButton = getActivity().findViewById(R.id.plusButton);
-        removeButton = getActivity().findViewById(R.id.minusButton);
+        fragmentLocations.toArray(); //Выставление очереди списка как у массива
+
+        tariffButton = view.findViewById(R.id.tariffButton);
+        wishesButton = view.findViewById(R.id.wishesButton);
+        timeButton = view.findViewById(R.id.whenButton);
+        addButton = view.findViewById(R.id.plusButton);
+        removeButton = view.findViewById(R.id.minusButton);
+
         tariffButton.setOnClickListener(this);
         wishesButton.setOnClickListener(this);
         timeButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
         removeButton.setOnClickListener(this);
+
+        return view;
     }
 
     @Override
-    public void onClick(View view){
+    public void onStart() { //Здесь прогружаются фрагменты мест. Если есть старые записи, то прогружаются по ним. Если нет, то создаются 2 пустых фрагмента.
+        super.onStart();
+        cleanLocations();
+        //loadLocations();
+    }
+
+    @Override
+    public void onClick(View view) {
         FragmentManager fm = getFragmentManager();
         switch (view.getId()) {
-            case R.id.tariffButton: tariffDialog.show(fm, "tariffDialog"); break;
-            case R.id.wishesButton: wishesDialog.show(fm, "wishesDialog"); break;
-            case R.id.whenButton: timeDialog.show(fm, "timeDialog"); break;
-            case R.id.plusButton: addWhereField(); break;
-            case R.id.minusButton: removeWhereField(); break;
+            case R.id.tariffButton:
+                tariffDialog.show(fm, "tariffDialog");
+                break;
+            case R.id.wishesButton:
+                wishesDialog.show(fm, "wishesDialog");
+                break;
+            case R.id.whenButton:
+                timeDialog.show(fm, "timeDialog");
+                break;
+            case R.id.plusButton:
+                addWhereField();
+                break;
+            case R.id.minusButton:
+                removeWhereField();
+                break;
         }
     }
 
-    //Добавляет новый фрагмент "куда" и увеличивается общее кол-во фрагментов на 1
-    private void addWhereField(){
-        if (locationsCount < MAX_LOCATIONS) {
-            FragmentWhere where = new FragmentWhere();
+    //Добавляет новый фрагмент "куда"
+    private void addWhereField() {
+        int totalLocationsAndLastId = fragmentLocations.size();
+        if (totalLocationsAndLastId < MAX_LOCATIONS) {
+            fragmentLocations.add(FragmentLocation.newInstance(FragmentLocation.MODE_WHERE, null, totalLocationsAndLastId));
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.locations_container, where, "location")
+                    .add(R.id.locations_container, fragmentLocations.get(totalLocationsAndLastId), "locationWhere")
                     .commit();
-            locationsCount++;
         }
     }
 
-    private void removeWhereField(){
-        if (locationsCount > 1) {
+    //Удаляет фрагмент "куда"
+    private void removeWhereField() {
+        int totalLocations = fragmentLocations.size();
+        int id = totalLocations - 1;
+        if (totalLocations > 2) {
+            sharedPrefManager.deleteWhereLocation(id);
             getFragmentManager().beginTransaction()
-                    .remove(getFragmentManager().findFragmentByTag("location"))
+                    .remove(fragmentLocations.get(id))
                     .commit();
-            locationsCount--;
+            fragmentLocations.remove(id);
         }
     }
 
-    @Override
-    public void onPause(){
-        super.onPause();
+    private void cleanLocations() {
+        for (FragmentLocation fragmentLocation : fragmentLocations) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .remove(fragmentLocation)
+                    .commit();
+        }
+        fragmentLocations.clear();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("MainScreen", "onDestroyView: !");
-    }
+//    private void loadLocations() {
+//        //Прогрузка всех сохраненных данных
+//        String savedFrom = sharedPrefManager.getFromLocation();
+//        String savedFirstWhere = sharedPrefManager.getWhereLocation(1);
+//        if (savedFrom != null && savedFirstWhere != null) {
+//            fragmentLocations.add(FragmentLocation.newInstance(FragmentLocation.MODE_FROM, savedFrom, 0));
+//            getFragmentManager()
+//                    .beginTransaction()
+//                    .add(R.id.locations_container, fragmentLocations.get(0))
+//                    .commit();
+//            int id = 1;
+//            while (sharedPrefManager.getWhereLocation(id) != null) {
+//                fragmentLocations.add(FragmentLocation.newInstance(FragmentLocation.MODE_WHERE, sharedPrefManager.getWhereLocation(id), id));
+//                getFragmentManager()
+//                        .beginTransaction()
+//                        .add(R.id.locations_container, fragmentLocations.get(id))
+//                        .commit();
+//                id++;
+//            }
+//
+//        } else if (sharedPrefManager.getFromLocation() != null) { //Прогрузка только "откуда" и пустого "куда", если сохранен только "куда"
+//            fragmentLocations.add(FragmentLocation.newInstance(FragmentLocation.MODE_FROM, savedFrom, 0));
+//            fragmentLocations.add(FragmentLocation.newInstance(FragmentLocation.MODE_WHERE, null, 1));
+//            getFragmentManager()
+//                    .beginTransaction()
+//                    .add(R.id.locations_container, fragmentLocations.get(0))
+//                    .add(R.id.locations_container, fragmentLocations.get(1))
+//                    .commit();
+//
+//        } else { //Если нет сохраненных данных, просто добавить 2 фрагмента
+//            fragmentLocations.add(FragmentLocation.newInstance(FragmentLocation.MODE_FROM, null, 0));
+//            fragmentLocations.add(FragmentLocation.newInstance(FragmentLocation.MODE_WHERE, null, 1));
+//
+//            getFragmentManager()
+//                    .beginTransaction()
+//                    .add(R.id.locations_container, fragmentLocations.get(0), "locationFrom")
+//                    .add(R.id.locations_container, fragmentLocations.get(1), "locationWhere")
+//                    .commit();
+//        }
+//    }
 }
 
 

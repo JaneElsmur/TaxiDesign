@@ -3,7 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context=".fragments.FragmentFrom"
+              tools:context=".fragments.FragmentLocation"
               android:orientation="horizontal"
               android:clickable="true"
               android:id="@+id/fromButton">
@@ -16,12 +16,12 @@
             />
 
     <TextView
-            android:hint="@string/from"
+            android:hint="location_form"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:id="@+id/fromEditText"
+            android:id="@+id/locationTextView"
             android:textAlignment="center"
-            android:fontFamily="monospace"
+            android:fontFamily="sans-serif"
             android:textSize="16sp"
             android:selectAllOnFocus="false"
             android:maxLines="1"
