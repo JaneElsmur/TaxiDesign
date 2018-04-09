@@ -82,5 +82,6 @@
     <string name="comment">Комментарий</string>
     <string name="house_if_not">Дом (если не указано)</string>
     <string name="need_check">Нужен чек</string>
+    <string name="add_to_favorites">Добавить в избранные адреса</string>
 
 </resources>

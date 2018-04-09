@@ -108,12 +108,24 @@
             android:textStyle="bold"
             android:gravity="center"/>
 
-    <Button
-            android:text="@string/ok"
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/okButton3"
-            android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:layout_height="match_parent">
+        <Button
+                android:text="@string/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancelTimeButton"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+        <Button
+                android:text="@string/ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/okTimeButton"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -223,13 +223,13 @@ public class EnterLocationActivity extends AppCompatActivity implements
         address = CoordinatesAPIService.getStringFromAddressList(addressList);
 
 //        // Открытие SearchView с полученным адресом, если он не null
-//          Пока отключено, так как есть фрагмент гугла
-//        if(address != null) {
+//          Пока отключено, так как есть фрагмент гугла. Вместо этого в этот фрагмент записывается полученный адрес
+        if(address != null) {
 //            isPickedByMap = true;
 //            //searchEditText.setText(address);
-//            latestPlace = address;
-//            placeAutocompleteFragment.setText(address);
-//        }
+            latestPlace = address;
+            placeAutocompleteFragment.setText(address);
+        }
     }
 
     @Override

@@ -14,12 +14,28 @@ public class SharedPrefManager {
     public static final String WHERE_LOCATION = "whereLocation";
     public static final String WISH = "wish";
     public static final String PAY_WAY = "payWay";
+    public static final String TARIFF = "tariff";
+    public static final String TIME = "time";
+    public static final String AS_SOON_AS_POSSIBLE = "now";
+    public static final String FAVORITE = "favorite";
+
+    /** Это значение по умолчанию возвращается в значения массива
+     *  с сохраненными значениями пикеров, если до этого там не было значений */
+    public static final int TIME_IS_NOT_SAVED = 10000;
 
     private SharedPreferences sharedPreferences;
 
     public SharedPrefManager(Context context) {
         sharedPreferences = context.getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
     }
+
+//    public void saveFavotiteLocation(String[] favoriteLocation) {
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(FAVORITE + 0, fromLocation[0]);
+//        editor.putString(FAVORITE + 1, fromLocation[1]);
+//        editor.putString(FAVORITE + 2, fromLocation[2]);
+//        editor.putString(FAVORITE + 3, fromLocation[3]);
+//    }
 
     /** Сохранение адреса "от куда"
      *
@@ -160,7 +176,68 @@ public class SharedPrefManager {
      *               1 - через Сбербанк Онлайн
      *               2 - картой
      */
-    public int getPayWay() {
+    public int getSavedPayWay() {
         return sharedPreferences.getInt(PAY_WAY, 0);
+    }
+
+    /** Сохранение выбранного тарифа
+     *
+     * @param tariff - тариф
+     *               0 - первый
+     *               1 - второй
+     *               2 - третий
+     *               3 - четвертый
+     */
+    public void saveTariff(int tariff) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(TARIFF, tariff);
+        editor.commit();
+    }
+
+    /** Получение сохраненного тарифа
+     *
+     * @return tariff - тариф
+     *               0 - первый
+     *               1 - второй
+     *               2 - третий
+     *               3 - четвертый
+     */
+    public int getSavedTariff() {
+        return sharedPreferences.getInt(TARIFF, 0);
+    }
+
+    /** Сохранение выбранных времени и даты заказа такси
+     *
+     * @param pickersValues - массив со значениями пикеров
+     *                      0 - дата
+     *                      1 - часы
+     *                      2 - минуты
+     */
+    public void saveTime(int[] pickersValues, boolean asSoonAsPossible){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for(int i = 0; i<3; i++){
+            editor.putInt(TIME + i, pickersValues[i]);
+        }
+        editor.putBoolean(AS_SOON_AS_POSSIBLE, asSoonAsPossible);
+        editor.commit();
+    }
+
+    /** Получение сохраненный ханее даты и времени заказа такси
+     *
+     * @return Массив со значениями пикеров
+     *                      0 - дата
+     *                      1 - часы
+     *                      2 - минуты
+     */
+    public int[] getSavedTime() {
+        int[] savedTime = new int[3];
+        for (int i = 0; i<3; i++) {
+            savedTime[i] = sharedPreferences.getInt(TIME + i, TIME_IS_NOT_SAVED);
+        }
+        return savedTime;
+    }
+
+    public boolean isAsSoonAsPossibleChecked(){
+        return sharedPreferences.getBoolean(AS_SOON_AS_POSSIBLE, true);
     }
 }

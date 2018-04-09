@@ -10,10 +10,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import janeelsmur.taxi.Utilites.SharedPrefManager;
+
 import java.util.Calendar;
 
 
 public class DialogTime extends DialogFragment implements View.OnClickListener {
+
+    private SharedPrefManager sharedPrefManager;
 
     private NumberPicker hourPicker;
     private NumberPicker minutePicker;
@@ -31,7 +35,7 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
     private String minuts;
     private int hours;
 
-    //Отображаемые значения в минутах и дате
+    //Отображаемые значения в минутом пикере
     private final String[] displayedTimeValues = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
     private final String[] displayedDateValues = new String[7];
 
@@ -46,6 +50,8 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         setStyle(STYLE_NO_TITLE, 0);
         super.onCreate(savedInstanceState);
+
+        sharedPrefManager = new SharedPrefManager(getActivity());
     }
 
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,7 +90,6 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 showTimeDisplay();
-                saveData();
             }
         });
         hourPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -110,14 +115,12 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
                 }
                 finalInf = (displayedDateValues[datePicker.getValue()] + " " + hours + ":" + displayedTimeValues[minutePicker.getValue()] + " " + AmPm);
                 information.setText(finalInf);
-                saveData();
             }
         });
         minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 showTimeDisplay();
-                saveData();
             }
         });
 
@@ -141,18 +144,24 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
         });
 
         //Установка слушателя кнопки
-        view.findViewById(R.id.okButton3).setOnClickListener(this);
+        view.findViewById(R.id.okTimeButton).setOnClickListener(this);
+        view.findViewById(R.id.cancelTimeButton).setOnClickListener(this);
 
         return view;
     }
 
+    /* Восстанавливаем прошлые значения после закрытия, если они были */
     @Override
-    public void onStart() {
-        super.onStart();
-        //Восстанавливаем прошлые значения после закрытия, если они были
-        if(timeValues_DataBaseValue[0]!=EMPTY) loadData();
+    public void onResume() {
+        super.onResume();
+
+        //Восстановление отметки чекбокса
+        asSoonAsPossible.setChecked(sharedPrefManager.isAsSoonAsPossibleChecked());
+
+        //Логика: если первый элемент массива с сохраненными значениями = TIME_IS_NOT_SAVED, то данные не были сохранены
+        if(sharedPrefManager.getSavedTime()[0]!=SharedPrefManager.TIME_IS_NOT_SAVED) loadData();
         //Если отмечена "как можно скорее", то отключаем выбор времени, иначе выводим диспей с выбранным временем
-        if (asSoonAsPossible.isChecked()){
+        if (asSoonAsPossible.isChecked()) {
             datePicker.setEnabled(false);  hourPicker.setEnabled(false); minutePicker.setEnabled(false);
         } else {
             showTimeDisplay();
@@ -161,14 +170,23 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
 
     public void onClick(View view){
         switch (view.getId()){
-            case(R.id.okButton3) : dismiss(); break;
+
+            case R.id.okTimeButton:
+                //Сохраняем выставленные значения
+                saveData();
+                break;
+
+            case R.id.cancelTimeButton:
+                break;
         }
+        dismiss();
     }
 
     public void onDismiss(DialogInterface dialog){
         super.onDismiss(dialog);
     }
 
+    //Выводит полную дату снизу выбора времени
     private void showTimeDisplay(){
         String AmPm;
         int hours;
@@ -192,18 +210,29 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
         finalInf = (displayedDateValues[datePicker.getValue()] + " " + hours + ":" + displayedTimeValues[minutePicker.getValue()] + " " + AmPm);
         information.setVisibility(View.VISIBLE);
         information.setText(finalInf);
-    } //Делает дисплей видимым и выводит на него все значения
+    }
 
-    private void saveData(){
-        timeValues_DataBaseValue[DATA_INDEX] = datePicker.getValue();
-        timeValues_DataBaseValue[HOURS_INDEX] = hourPicker.getValue();
-        timeValues_DataBaseValue[MINUTES_INDEX] = minutePicker.getValue();
-    } //Сохраняет введенные значения
+    //Сохраняет введенные значения
+    private void saveData() {
+        int[] pickValues = new int[3];
+        pickValues[0] = datePicker.getValue();
+        pickValues[1] = hourPicker.getValue();
+        pickValues[2] = minutePicker.getValue();
+        sharedPrefManager.saveTime(pickValues, asSoonAsPossible.isChecked());
+        //timeValues_DataBaseValue[DATA_INDEX] = datePicker.getValue();
+        //timeValues_DataBaseValue[HOURS_INDEX] = hourPicker.getValue();
+        //timeValues_DataBaseValue[MINUTES_INDEX] = minutePicker.getValue();
+    }
 
-    private void loadData(){
-            datePicker.setValue(timeValues_DataBaseValue[DATA_INDEX]);
-            hourPicker.setValue(timeValues_DataBaseValue[HOURS_INDEX]);
-            minutePicker.setValue(timeValues_DataBaseValue[MINUTES_INDEX]);
-    } //Выставляет в пикерах введенные до этого значения
+    //Выставляет в пикерах введенные до этого значения
+    private void loadData() {
+        int[] pickValues = sharedPrefManager.getSavedTime();
+        //datePicker.setValue(timeValues_DataBaseValue[DATA_INDEX]);
+        //hourPicker.setValue(timeValues_DataBaseValue[HOURS_INDEX]);
+        //minutePicker.setValue(timeValues_DataBaseValue[MINUTES_INDEX]);
+        datePicker.setValue(pickValues[0]);
+        hourPicker.setValue(pickValues[1]);
+        minutePicker.setValue(pickValues[2]);
+    }
 
 }

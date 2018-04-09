@@ -24,10 +24,6 @@
     <item android:title="@string/communication">
         <menu>
             <item
-                    android:id="@+id/i_have_a_problem"
-                    android:icon="@drawable/sandwich_icon"
-                    android:title="@string/i_have_a_problem"/>
-            <item
                     android:id="@+id/call_to_operator"
                     android:icon="@drawable/sandwich_icon"
                     android:title="@string/operator_call"/>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import janeelsmur.taxi.Utilites.SharedPrefManager;
@@ -25,6 +26,7 @@ public class DialogEnterAddressWhenChosen extends DialogFragment implements View
     private EditText additionEditText;
     private EditText commentEditText;
     private EditText houseEditText;
+    private CheckBox addInFavorites;
 
     public static DialogEnterAddressWhenChosen newInstance(int id, int mode, String location) {
         Bundle args = new Bundle();
@@ -58,6 +60,7 @@ public class DialogEnterAddressWhenChosen extends DialogFragment implements View
         commentEditText = (EditText) view.findViewById(R.id.comment_to_address);
         ok = (Button) view.findViewById(R.id.acceptAddressBtn);
         cancel = (Button) view.findViewById(R.id.cancelAddressBtn);
+        addInFavorites = (CheckBox) view.findViewById(R.id.addInFavoritesCheckBox);
 
 
         //Выставление выбранного аддреса
@@ -96,6 +99,7 @@ public class DialogEnterAddressWhenChosen extends DialogFragment implements View
                         break;
                 }
                 dismiss();
+                getActivity().finish();
 
             //Кнопка отмены
             case R.id.cancelAddressBtn:

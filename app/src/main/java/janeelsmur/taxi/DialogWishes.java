@@ -1,10 +1,8 @@
 package janeelsmur.taxi;
 
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
@@ -14,11 +12,13 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import janeelsmur.taxi.Utilites.SharedPrefManager;
 
-import java.util.ArrayList;
-
 public class DialogWishes extends DialogFragment implements OnClickListener {
 
+    private static final int WISHES_COUNT = 8;
+    private static final int PAY_WAY_COUNT = 2;
+
     private SharedPrefManager sharedPrefManager;
+
 
     //Массив RadioButton'ов
     /* 0 - оплата наличными, 1 - оплата через сб онлайн, 2 - оплата банковской картой */
@@ -33,7 +33,6 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
     // 5 - Нужен пустой багажник
     // 6 - Нужен универсал
     // 7 - Нужен чек
-    private static final int WISHES_COUNT = 8;
     private CheckBox[] checkBoxes = new CheckBox[WISHES_COUNT];
 
     @Override
@@ -64,9 +63,9 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
         //Инициализация всех RadioButton'ов
         payWay[0] = view.findViewById(R.id.readyMoneyRadioButton);
         payWay[1] = view.findViewById(R.id.sberbankOnlineRadioButton);
-        //payWay[2] = view.findViewById(id кнопки оплаты по банковской карте); //В РАЗРАБОТКЕ
 
-        //Как только выбираем тариф, отметка выбора на других RadioButton'ах снимается (Есть ли способ компактнее?)
+        //Как только выбираем тариф, отметка выбора на других RadioButton'ах снимается.
+        //Кнопки находятся в разных лэйаутах, так что объединить их в одну группу не получится.
         payWay[0].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -83,15 +82,6 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
                 }
             }
         });
-        // В РАЗРАБОТКЕ
-        /* payWay[2].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    payWay[0].setChecked(false); payWay[1].setChecked(false);
-                }
-            }
-        }); */
         //-------------------------------------------------------------------------------------------------------
         return view;
     }
@@ -100,6 +90,7 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
     public void onResume() {
         super.onResume();
         loadWishes(WISHES_COUNT);
+        loadPayWay();
     }
 
     @Override
@@ -107,14 +98,11 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
         switch (view.getId()){
             case R.id.okWishesButton:
                 if (payWay[0].isChecked()){
-                    //Передаем это в обработчик (доделать
+                    sharedPrefManager.savePayWay(0);
+                } else if (payWay[1].isChecked()){
+                    sharedPrefManager.savePayWay(1);
                 }
-                if (payWay[1].isChecked()){
-                    //Передаем это в обработчик (доделать)
-                }
-                // В РАЗРАБОТКЕ
-                // if (payWay[2].isChecked()){
-                //}
+
                 sharedPrefManager.saveWishes(checkBoxes, WISHES_COUNT);
                 dismiss();
                 break;
@@ -128,6 +116,16 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
         boolean[] checks = sharedPrefManager.getWishes(wishesCount);
         for(int i = 0; i<wishesCount; i++) {
             checkBoxes[i].setChecked(checks[i]);
+        }
+    }
+
+    private void loadPayWay(){
+        for(int i = 0; i<2; i++){
+            int savedPayWay = sharedPrefManager.getSavedPayWay();
+            switch (savedPayWay){
+                case 0: payWay[0].setChecked(true); break;
+                case 1: payWay[1].setChecked(true); break;
+            }
         }
     }
 

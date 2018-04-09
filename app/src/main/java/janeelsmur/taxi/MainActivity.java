@@ -103,8 +103,6 @@ public class MainActivity extends AppCompatActivity
                 transaction.replace(R.id.container, underConstruction);
             }
 
-        } else if (id == R.id.i_have_a_problem) {
-
         } else if (id == R.id.call_to_operator) {
             callOperatorDialog.show(getSupportFragmentManager(), "CallOperatorDialog");
 

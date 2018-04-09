@@ -250,16 +250,16 @@ public class FragmentMainScreen extends Fragment implements OnClickListener {
         StringBuilder savedWhereBuilder = new StringBuilder();
         if(whereAddressStrings != null) {
             savedWhereBuilder.append(whereAddressStrings[0]);
-            if(!whereAddressStrings[0].contains(",")) {
+            if(!whereAddressStrings[0].contains(",")) { //Если улица не содержит дом
                 savedWhereBuilder.append(", ");
                 savedWhereBuilder.append(whereAddressStrings[1]);
             }
             if(whereAddressStrings[2]!=null) {
-                savedWhereBuilder.append(",");
+                savedWhereBuilder.append(", ");
                 savedWhereBuilder.append(whereAddressStrings[2]);
             }
         }
-        return savedWhereBuilder.toString();
+        return savedWhereBuilder.toString(); //Сохраненное значение готовое для вывода
     }
 }
 
