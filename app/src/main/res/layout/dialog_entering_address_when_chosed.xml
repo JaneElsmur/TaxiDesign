@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TextView
+                    android:text="chosen_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/chosen_address"
+                    android:gravity="center" android:textSize="14sp"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textNoSuggestions"
+                    android:ems="10"
+                    android:maxLength="10"
+                    android:hint="@string/house_if_not"
+                    android:id="@+id/houseEditText" android:singleLine="true"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textNoSuggestions"
+                    android:hint="@string/additions_to_address"
+                    android:ems="10"
+                    android:maxLength="30"
+                    android:id="@+id/additions_to_address" android:singleLine="true"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/comment"
+                    android:ems="10"
+                    android:id="@+id/comment_to_address"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <Button
+                        android:text="@string/cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cancelAddressBtn"
+                        android:layout_weight="1"
+                        style="@style/Widget.AppCompat.Button.Colored"/>
+                <Button
+                        android:text="@string/ok"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/acceptAddressBtn"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_weight="1"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+

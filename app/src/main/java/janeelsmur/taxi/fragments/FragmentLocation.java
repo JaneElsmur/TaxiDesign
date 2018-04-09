@@ -1,6 +1,5 @@
 package janeelsmur.taxi.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import janeelsmur.taxi.EnterLocation;
+import janeelsmur.taxi.EnterLocationActivity;
 import janeelsmur.taxi.R;
 
 
@@ -71,7 +70,7 @@ public class FragmentLocation extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(getContext(), EnterLocation.class);
+        Intent intent = new Intent(getContext(), EnterLocationActivity.class);
 
         intent.putExtra("id", id);
         intent.putExtra("mode", mode);

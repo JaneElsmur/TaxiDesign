@@ -3,46 +3,164 @@ package janeelsmur.taxi.Utilites;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-
-import java.util.Set;
+import android.widget.CheckBox;
+import java.util.ArrayList;
 
 public class SharedPrefManager {
 
+    private final String TAG = "SavingLocations";
+
     public static final String FROM_LOCATION = "fromLocation";
     public static final String WHERE_LOCATION = "whereLocation";
+    public static final String WISH = "wish";
+    public static final String PAY_WAY = "payWay";
 
     private SharedPreferences sharedPreferences;
 
-    public SharedPrefManager(Context context){
+    public SharedPrefManager(Context context) {
         sharedPreferences = context.getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
     }
 
-    public void saveFromLocation(Set<String> fromLocation){
+    /** Сохранение адреса "от куда"
+     *
+     * @param fromLocation:
+     *                    index 0 - улица (возможно, что будет записана с домом, в этом случае в индексе 1 будет записан null, если пользователь не записал другое значение)
+     *                    index 1 - дом
+     *                    index 2 - подъезд/объект, к которому нужно подъехать
+     *                    index 3 - addition **/
+    public void saveFromLocation(String[] fromLocation) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet(FROM_LOCATION, fromLocation);
+        editor.putString(FROM_LOCATION + 0, fromLocation[0]);
+        editor.putString(FROM_LOCATION + 1, fromLocation[1]);
+        editor.putString(FROM_LOCATION + 2, fromLocation[2]);
+        editor.putString(FROM_LOCATION + 3, fromLocation[3]);
         editor.commit();
     }
 
-    public void saveWhereLocation(Set<String> whereLocation, int id){
+    /** Сохранение адреса "куда"
+     *
+     * @param whereLocation:
+     *                    index 0 - улица (возможно, что будет записана с домом, в этом случае в индексе 1 будет записан null, если пользователь не записал другое значение)
+     *                    index 1 - дом
+     *                    index 2 - подъезд/объект, к которому нужно подъехать
+     *                    index 3 - комментарий **/
+    public void saveWhereLocation(String[] whereLocation, int id) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet(WHERE_LOCATION + id, whereLocation);
+        editor.putString(WHERE_LOCATION + id + 0, whereLocation[0]);
+        editor.putString(WHERE_LOCATION + id + 1, whereLocation[1]);
+        editor.putString(WHERE_LOCATION + id + 2, whereLocation[2]);
+        editor.putString(WHERE_LOCATION + id + 3, whereLocation[3]);
         editor.commit();
     }
 
+    /** Удаление адреса "куда" **/
     public void deleteWhereLocation(int id) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove(WHERE_LOCATION + id);
+        editor.remove(WHERE_LOCATION + id + 0);
+        editor.remove(WHERE_LOCATION + id + 1);
+        editor.remove(WHERE_LOCATION + id + 2);
+        editor.remove(WHERE_LOCATION + id + 3);
         editor.commit();
     }
 
-    //Считать сохраненную локацию типа "куда"
-    public Set<String> getWhereLocation(int id) {
-        return sharedPreferences.getStringSet(WHERE_LOCATION + id, null);
+    /** Получение адреса "откуда"
+     *
+     * @return  whereLocation:
+     *                    index 0 - улица (возможно, что будет записана с домом, в этом случае в индексе 1 будет записан null, если пользователь не записал другое значение)
+     *                    index 1 - дом
+     *                    index 2 - подъезд/объект, к которому нужно подъехать
+     *                    index 3 - комментарий **/
+    public String[] getWhereLocation(int id) {
+        String[] whereLocation = new String[4];
+        whereLocation[0] = sharedPreferences.getString(WHERE_LOCATION + id + 0, null);
+        whereLocation[1] = sharedPreferences.getString(WHERE_LOCATION + id + 1, null);
+        whereLocation[2] = sharedPreferences.getString(WHERE_LOCATION + id + 2, null);
+        whereLocation[3] = sharedPreferences.getString(WHERE_LOCATION + id + 3, null);
+        Log.d(TAG, "getWhereLocation: " + whereLocation[0]);
+        if(whereLocation[0] == null) return null; //Если аддрес пустой, то ничего не возвращаем
+            else return whereLocation; //Иначе возвращаем весь массив
     }
 
-    //Считать сохраненную локацию типа "откуда"
-    public Set<String> getFromLocation() {
-        return sharedPreferences.getStringSet(FROM_LOCATION, null);
+    /** Получение адреса "куда"
+     *
+     * @return  fromLocation:
+     *                    index 0 - улица (возможно, что будет записана с домом, в этом случае в индексе 1 будет записан null, если пользователь не записал другое значение)
+     *                    index 1 - дом
+     *                    index 2 - подъезд/объект, к которому нужно подъехать
+     *                    index 3 - комментарий **/
+    public String[] getFromLocation() {
+        String[] fromLocation = new String[4];
+        fromLocation[0] = sharedPreferences.getString(FROM_LOCATION + 0, null);
+        fromLocation[1] = sharedPreferences.getString(FROM_LOCATION + 1, null);
+        fromLocation[2] = sharedPreferences.getString(FROM_LOCATION + 2, null);
+        fromLocation[3] = sharedPreferences.getString(FROM_LOCATION + 3, null);
+        if(fromLocation[0] == null) return null; //Если аддрес пустой, то ничего не возвращаем
+            else return fromLocation; //Иначе возвращаем весь массив
     }
 
+    /** Сохранение пожеланий
+     *
+     * @param wishes - массив с чекбоксами пожеланий
+     *               0 - Нужна сдача
+     *               1 - Нужно детское кресло
+     *               2 - Некурящий салон
+     *               3 - Провоз животкного
+     *               4 - I don't speck Russian
+     *               5 - Нужен пустой багажник
+     *               6 - Нужен универсал
+     *               7 - Нужен чек
+     */
+    public void saveWishes(CheckBox[] wishes, int wishesCount){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        for(int i = 0; i<wishesCount; i++) {
+            Log.d(TAG, "saveWishes: " + wishes[i].isChecked());
+            editor.putBoolean(WISH + i, wishes[i].isChecked());
+        }
+        editor.commit();
+    }
+
+    /** Взять сохраненные пожелания
+     *
+     * @return wishes - массив с чекбоксами пожеланий
+     *               0 - Нужна сдача
+     *               1 - Нужно детское кресло
+     *               2 - Некурящий салон
+     *               3 - Провоз животкного
+     *               4 - I don't speck Russian
+     *               5 - Нужен пустой багажник
+     *               6 - Нужен универсал
+     *               7 - Нужен чек
+     */
+    public boolean[] getWishes(int wishesCount) {
+        boolean[] checkBoxes = new boolean[wishesCount];
+        for (int i = 0; i<wishesCount; i++){
+            Log.d(TAG, "getWishes: " + sharedPreferences.getBoolean(WISH + i, false));
+            checkBoxes[i] = sharedPreferences.getBoolean(WISH + i, false);
+        }
+        return checkBoxes;
+    }
+
+    /** Сохранение способа платежа
+     *
+     * @param payWay - способ платежа
+     *               0 - наличные
+     *               1 - через Сбербанк Онлайн
+     *               2 - картой
+     */
+    public void savePayWay(int payWay) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(PAY_WAY, payWay);
+        editor.commit();
+    }
+
+    /** Получение способа платежа
+     *
+     * @return payWay - способ платежа
+     *               0 - наличные
+     *               1 - через Сбербанк Онлайн
+     *               2 - картой
+     */
+    public int getPayWay() {
+        return sharedPreferences.getInt(PAY_WAY, 0);
+    }
 }

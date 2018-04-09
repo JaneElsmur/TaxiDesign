@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-                android:name=".EnterLocation"
+                android:name=".EnterLocationActivity"
                 android:label="@string/title_activity_enter_location"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">

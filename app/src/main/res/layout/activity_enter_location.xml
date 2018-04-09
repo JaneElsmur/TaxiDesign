@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="janeelsmur.taxi.EnterLocation">
+        tools:context="janeelsmur.taxi.EnterLocationActivity">
 
     <android.support.v7.widget.Toolbar
             app:titleTextColor="@color/white"
@@ -20,14 +20,31 @@
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/googlePlacesFragmentContainer" android:layout_below="@+id/enteringLocationToolbar"
+            android:layout_alignParentLeft="true" android:layout_alignParentStart="true">
+
+        <fragment
+                android:id="@+id/place_autocomplete_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
             android:id="@+id/search_field"
             android:background="@color/colorAccent"
-            android:layout_marginTop="56dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             tools:layout_editor_absoluteY="25dp"
-            tools:layout_editor_absoluteX="8dp">
+            tools:layout_editor_absoluteX="8dp" android:visibility="gone"
+            android:layout_below="@+id/googlePlacesFragmentContainer" android:layout_toRightOf="@+id/addressesListView"
+            android:layout_toEndOf="@+id/addressesListView">
 
         <Space
                 android:layout_width="10dp"
@@ -66,7 +83,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/map"
-              tools:context="janeelsmur.taxi.EnterLocation"
+              tools:context="janeelsmur.taxi.EnterLocationActivity"
               android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
     </com.google.android.gms.maps.MapView>
@@ -135,5 +152,17 @@
                 android:textColor="@android:color/black"
                 android:layout_weight="0.19"/>
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="normal" app:srcCompat="@drawable/ic_tick"
+            android:id="@+id/pickAddressFab"
+            android:layout_above="@+id/border"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" android:visibility="visible"/>
 
 </RelativeLayout>

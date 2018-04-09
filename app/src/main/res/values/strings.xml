@@ -46,8 +46,7 @@
     </string-array>
 
     <string name="under_construction">В разработке</string>
-    <string name="wishes_hello_text">Выберите, какой способ оплаты будет удобен, а так же важные для Вас опции, а мы обо
-        всём позаботимся :)
+    <string name="wishes_hello_text">Выберите, какой способ оплаты\nбудет удобен, а так же важные\nдля Вас опции, а мы обо всём позаботимся :)
     </string>
     <string name="ready_money">Наличные</string>
     <string name="payment_way">Способ оплаты</string>
@@ -79,5 +78,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string name="additions_to_address">Подъезд/к чему подъехать</string>
+    <string name="comment">Комментарий</string>
+    <string name="house_if_not">Дом (если не указано)</string>
+    <string name="need_check">Нужен чек</string>
 
 </resources>

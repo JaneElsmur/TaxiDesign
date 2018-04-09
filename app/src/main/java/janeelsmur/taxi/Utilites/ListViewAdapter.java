@@ -9,6 +9,7 @@ import android.widget.TextView;
 import janeelsmur.taxi.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ListViewAdapter extends BaseAdapter {
@@ -17,15 +18,12 @@ public class ListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private List<String> addresses;
-    private ArrayList<String> arrayList;
+    private List<String> addresses; //Адреса, которые будут отображаться
 
-    public ListViewAdapter(Context context, List<String> addresses) {
+    public ListViewAdapter(Context context) {
         mContext = context;
-        this.addresses = addresses;
         inflater = LayoutInflater.from(mContext);
-        this.arrayList = new ArrayList<>();
-        this.arrayList.addAll(addresses);
+        addresses = new ArrayList<>();
     }
 
     @Override
@@ -59,19 +57,9 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // Filter Class
-    public void filter(String charText) {
-        charText = charText.toLowerCase();
+    public void show(ArrayList<String> predictionsResults) {
         addresses.clear();
-        if (charText.length() == 0) {
-            //Ничего не введено
-        } else {
-            for (String address : arrayList) {
-                if (address.toLowerCase().contains(charText)) {
-                    addresses.add(address);
-                }
-            }
-            if (addresses.size() == 0) addresses.add("Ничего не найдено");
-        }
+        addresses.addAll(predictionsResults);
         notifyDataSetChanged();
     }
 
