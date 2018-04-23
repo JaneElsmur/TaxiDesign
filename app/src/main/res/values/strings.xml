@@ -1,6 +1,8 @@
 <resources>
 
-    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyA0td5i5OF9IdmMR7-W1VaXZqFXbo70a9Q</string>
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyA0td5i5OF9IdmMR7-W1VaXZqFXbo70a9Q
+    </string>
 
     <string name="app_name">Такси</string>
     <string name="open_sandwich_menu">Open sandwich menu</string>
@@ -46,8 +48,11 @@
     </string-array>
 
     <string name="under_construction">В разработке</string>
-    <string name="wishes_hello_text">Выберите, какой способ оплаты\nбудет удобен, а так же важные\nдля Вас опции, а мы обо всём позаботимся :)
+
+    <string name="wishes_hello_text">Выберите, какой способ оплаты\nбудет удобен, а так же важные\nдля Вас опции, а мы
+        обо всём позаботимся :)
     </string>
+
     <string name="ready_money">Наличные</string>
     <string name="payment_way">Способ оплаты</string>
     <string name="by_sberbank_online">Через \"Сбербанк Онлайн\"</string>
@@ -75,13 +80,25 @@
     <string name="from_short">Из:</string>
     <string name="where_short">До:</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
     <string name="additions_to_address">Подъезд/к чему подъехать</string>
     <string name="comment">Комментарий</string>
     <string name="house_if_not">Дом (если не указано)</string>
+    <string name="without_wishes">Без пожеланий</string>
     <string name="need_check">Нужен чек</string>
     <string name="add_to_favorites">Добавить в избранные адреса</string>
+    <string name="final_order_header_text">Пожалуйста, проверьте данные перед заказом.\nЖелаем Вам приятного пути :)
+    </string>
+    <string name="from_with_dotes">Откуда:</string>
+    <string name="where_with_dotes">Куда:</string>
+    <string name="tariff_with_dots">Тариф:</string>
+    <string name="wishes_with_dots">Пожелания:</string>
+    <string name="date_of_arrival_with_dots">Дата прибытия:</string>
+    <string name="tariff_1">Тариф 1</string>
+    <string name="tariff_2">Тариф 2</string>
+    <string name="tariff_3">Тариф 3</string>
+    <string name="tariff_4">Тариф 4</string>
+    <string name="delete">Удалить</string>
 
 </resources>

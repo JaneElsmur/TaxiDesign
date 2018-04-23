@@ -14,7 +14,6 @@ import janeelsmur.taxi.Utilites.SharedPrefManager;
 
 public class DialogWishes extends DialogFragment implements OnClickListener {
 
-    private static final int WISHES_COUNT = 8;
     private static final int PAY_WAY_COUNT = 2;
 
     private SharedPrefManager sharedPrefManager;
@@ -33,7 +32,7 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
     // 5 - Нужен пустой багажник
     // 6 - Нужен универсал
     // 7 - Нужен чек
-    private CheckBox[] checkBoxes = new CheckBox[WISHES_COUNT];
+    private CheckBox[] checkBoxes = new CheckBox[SharedPrefManager.WISHES_COUNT];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +88,7 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        loadWishes(WISHES_COUNT);
+        loadWishes(SharedPrefManager.WISHES_COUNT);
         loadPayWay();
     }
 
@@ -103,7 +102,7 @@ public class DialogWishes extends DialogFragment implements OnClickListener {
                     sharedPrefManager.savePayWay(1);
                 }
 
-                sharedPrefManager.saveWishes(checkBoxes, WISHES_COUNT);
+                sharedPrefManager.saveWishes(checkBoxes, SharedPrefManager.WISHES_COUNT);
                 dismiss();
                 break;
 

@@ -11,10 +11,7 @@
                 android:id="@+id/profile"
                 android:icon="@drawable/sandwich_icon"
                 android:title="@string/profile"/>
-        <item
-                android:id="@+id/favorite_addresses"
-                android:icon="@drawable/sandwich_icon"
-                android:title="@string/favorite_addresses"/>
+
         <item
                 android:id="@+id/bank_card"
                 android:icon="@drawable/sandwich_icon"

@@ -17,11 +17,15 @@ public class SharedPrefManager {
     public static final String TARIFF = "tariff";
     public static final String TIME = "time";
     public static final String AS_SOON_AS_POSSIBLE = "now";
+    public static final String TIME_AS_TEXT = "timeAsText";
     public static final String FAVORITE = "favorite";
+    public static final String SAVED_FAVORITES_COUNTER = "savedFavCounter";
 
     /** Это значение по умолчанию возвращается в значения массива
      *  с сохраненными значениями пикеров, если до этого там не было значений */
     public static final int TIME_IS_NOT_SAVED = 10000;
+    /** Количество сохраняемых пожеланий. Если нужно добавить еще, то нужно увеличить эту константу */
+    public static final int WISHES_COUNT = 8;
 
     private SharedPreferences sharedPreferences;
 
@@ -89,12 +93,11 @@ public class SharedPrefManager {
     public String[] getWhereLocation(int id) {
         String[] whereLocation = new String[4];
         whereLocation[0] = sharedPreferences.getString(WHERE_LOCATION + id + 0, null);
+        if(whereLocation[0] == null) return null;
         whereLocation[1] = sharedPreferences.getString(WHERE_LOCATION + id + 1, null);
         whereLocation[2] = sharedPreferences.getString(WHERE_LOCATION + id + 2, null);
         whereLocation[3] = sharedPreferences.getString(WHERE_LOCATION + id + 3, null);
-        Log.d(TAG, "getWhereLocation: " + whereLocation[0]);
-        if(whereLocation[0] == null) return null; //Если аддрес пустой, то ничего не возвращаем
-            else return whereLocation; //Иначе возвращаем весь массив
+        return whereLocation; //Иначе возвращаем весь массив
     }
 
     /** Получение адреса "куда"
@@ -107,12 +110,73 @@ public class SharedPrefManager {
     public String[] getFromLocation() {
         String[] fromLocation = new String[4];
         fromLocation[0] = sharedPreferences.getString(FROM_LOCATION + 0, null);
+        if(fromLocation[0] == null) return null; //Если аддрес пустой, то ничего не возвращаем
         fromLocation[1] = sharedPreferences.getString(FROM_LOCATION + 1, null);
         fromLocation[2] = sharedPreferences.getString(FROM_LOCATION + 2, null);
         fromLocation[3] = sharedPreferences.getString(FROM_LOCATION + 3, null);
-        if(fromLocation[0] == null) return null; //Если аддрес пустой, то ничего не возвращаем
-            else return fromLocation; //Иначе возвращаем весь массив
+        return fromLocation; //Иначе возвращаем весь массив
     }
+
+    /** Сохранение адреса в избранное
+     *
+     * @param   favoriteAddress - массив значений адреса
+     *                    index 0 - улица (возможно, что будет записана с домом, в этом случае в индексе 1 будет записан null, если пользователь не записал другое значение)
+     *                    index 1 - дом
+     *                    index 2 - подъезд/объект, к которому нужно подъехать
+     *                    index 3 - комментарий **/
+    public void saveAddressInFavorites(String[] favoriteAddress) {
+        int currentId = sharedPreferences.getInt(SAVED_FAVORITES_COUNTER, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(FAVORITE + currentId + 0, favoriteAddress[0]);
+        editor.putString(FAVORITE + currentId + 1, favoriteAddress[1]);
+        editor.putString(FAVORITE + currentId + 2, favoriteAddress[2]);
+        editor.putString(FAVORITE + currentId + 3, favoriteAddress[3]);
+        editor.commit();
+        incrementFavoritesId();
+    }
+
+    /** Получение адреса из избранного
+     *
+     * @param addressId - id сохраненного адреса
+     *
+     * @return  index 0 - улица (возможно, что будет записана с домом, в этом случае в индексе 1 будет записан null, если пользователь не записал другое значение)
+     *          index 1 - дом
+     *          index 2 - подъезд/объект, к которому нужно подъехать
+     *          index 3 - комментарий **/
+    public String[] getSavedFavoriteAddress(int addressId){
+        String[] address = new String[4];
+        address[0] = sharedPreferences.getString(FAVORITE + addressId + 0, null);
+        if(address[0]==null) return null; //Если аддрес пустой, то ничего не возвращаем
+        address[1] = sharedPreferences.getString(FAVORITE + addressId + 1, null);
+        address[2] = sharedPreferences.getString(FAVORITE + addressId + 2, null);
+        address[3] = sharedPreferences.getString(FAVORITE + addressId + 3, null);
+        return address;
+    }
+
+    /** Удаление избранного адреса
+     *
+     * @param addressId - id адреса
+     */
+    public void deleteAddressFromFavorites(int addressId) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(FAVORITE + addressId + 0);
+        editor.remove(FAVORITE + addressId + 1);
+        editor.remove(FAVORITE + addressId + 2);
+        editor.remove(FAVORITE + addressId + 3);
+        editor.commit();
+    }
+
+    private void incrementFavoritesId() {
+        int currentId = sharedPreferences.getInt(SAVED_FAVORITES_COUNTER, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(SAVED_FAVORITES_COUNTER, currentId + 1);
+        editor.apply();
+    }
+
+    public int getFavoritesMaxId() {
+        return sharedPreferences.getInt(SAVED_FAVORITES_COUNTER, 0);
+    }
+
 
     /** Сохранение пожеланий
      *
@@ -212,13 +276,17 @@ public class SharedPrefManager {
      *                      0 - дата
      *                      1 - часы
      *                      2 - минуты
+     * @param asSoonAsPossible - выбрано ли "Как можно скорее"
+     *
+     * @param timeAsText - время, переведенное в текст
      */
-    public void saveTime(int[] pickersValues, boolean asSoonAsPossible){
+    public void saveTime(int[] pickersValues, boolean asSoonAsPossible, String timeAsText) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         for(int i = 0; i<3; i++){
             editor.putInt(TIME + i, pickersValues[i]);
         }
         editor.putBoolean(AS_SOON_AS_POSSIBLE, asSoonAsPossible);
+        editor.putString(TIME_AS_TEXT, timeAsText);
         editor.commit();
     }
 
@@ -235,6 +303,10 @@ public class SharedPrefManager {
             savedTime[i] = sharedPreferences.getInt(TIME + i, TIME_IS_NOT_SAVED);
         }
         return savedTime;
+    }
+
+    public String getSavedTimeAsText() {
+        return sharedPreferences.getString(TIME_AS_TEXT, null);
     }
 
     public boolean isAsSoonAsPossibleChecked(){

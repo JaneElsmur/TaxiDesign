@@ -15,6 +15,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
 
         <activity
@@ -48,6 +49,12 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
 
+        <activity android:name=".OrderingInformationActivity">
+
+        </activity>
+        <activity android:name=".ActivityFavoriteAddresses"
+                  android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

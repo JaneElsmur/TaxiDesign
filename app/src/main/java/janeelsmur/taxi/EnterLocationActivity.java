@@ -1,28 +1,21 @@
 package janeelsmur.taxi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.*;
@@ -30,10 +23,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import janeelsmur.taxi.Utilites.AutocompletePredictions;
 import janeelsmur.taxi.Utilites.CoordinatesAPIService;
-import janeelsmur.taxi.Utilites.ListViewAdapter;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class EnterLocationActivity extends AppCompatActivity implements
@@ -46,7 +37,8 @@ public class EnterLocationActivity extends AppCompatActivity implements
         //TextWatcher,
         {
 
-    private final DialogFavorites favoritesDialog = new DialogFavorites();
+    //Активность с избранными адресами возвращает этот результат, если адрес был выбран из избранных
+    public static final int RESULT_ADDRESS_PICKED_FROM_FAVORITES = 10000;
 
     //Сохраненные значения
     private int mode;
@@ -131,6 +123,7 @@ public class EnterLocationActivity extends AppCompatActivity implements
                 .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
                 .build();
 
+        //Тулбар
         Toolbar toolbar = (Toolbar) findViewById(R.id.enteringLocationToolbar);
         toolbar.setTitle(R.string.address_entering);
         setSupportActionBar(toolbar);
@@ -234,15 +227,19 @@ public class EnterLocationActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View v) {
-        FragmentManager fm = getSupportFragmentManager();
         switch (v.getId()) {
             case R.id.favoritesButton:
-                favoritesDialog.show(fm, "favoritesDialog");
+                Intent intent = new Intent(this, ActivityFavoriteAddresses.class);
+                intent.putExtra("mode", mode);
+                intent.putExtra("idOfLocation", id);
+                startActivityForResult(intent, RESULT_ADDRESS_PICKED_FROM_FAVORITES);
                 break;
 
             case R.id.pickAddressFab:
-                addressEnteringDialog = DialogEnterAddressWhenChosen.newInstance(id, mode, latestPlace);
+                addressEnteringDialog = DialogEnterAddressWhenChosen.newInstance(id, mode, false, latestPlace, null);
                 addressEnteringDialog.show(getSupportFragmentManager(), "DialogEnteringAddress");
+                break;
+
                 //Работа с собственным search_view
 //            case R.id.cancelSearchingBtn:
 //                setSearchMode(false);
@@ -335,7 +332,13 @@ public class EnterLocationActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    //Обработка нажатия на аппаратную кнопку "назад"
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_ADDRESS_PICKED_FROM_FAVORITES) finish();
+    }
+
+            //Обработка нажатия на аппаратную кнопку "назад"
     @Override
     public void onBackPressed() {
         //Если пользовател в режиме поиска, выходим из него

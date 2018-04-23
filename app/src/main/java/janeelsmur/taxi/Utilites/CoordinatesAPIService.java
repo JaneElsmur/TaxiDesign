@@ -12,7 +12,31 @@ public class CoordinatesAPIService {
 
     private static final String TAG = "CoordinatesAPIService";
 
-    public static List<Address> getAddressListFromCoordinates(Context context, double latitude, double longtitude){
+//    public void asyncJson(String address){
+//        address = address.replace(" ", "+");
+//
+//        String url = "http://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&sensor=true";
+//
+//        aq.ajax(url, JSONObject.class, new AjaxCallback<JSONObject>() {
+//
+//            @Override
+//            public void callback(String url, JSONObject json, AjaxStatus status) {
+//
+//                if(json != null){
+//
+//                    //here you work with the response json
+//                    JSONArray results = json.getJSONArray("results");
+//                    Toast.makeText(context, results.getJSONObject(1).getString("formatted_address"));
+//
+//                }else{
+//                    //ajax error, show error code
+//                    Toast.makeText(aq.getContext(), "Error:" + status.getCode(), Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+//    }
+
+    public static List<Address> getAddressListFromCoordinates(Context context, double latitude, double longtitude) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
             return geocoder.getFromLocation(latitude, longtitude, 1);
@@ -32,7 +56,7 @@ public class CoordinatesAPIService {
         else return null;
     }
 
-    private static boolean validateAddress(Address address){
+    private static boolean validateAddress(Address address) {
         return address.getMaxAddressLineIndex() == 4;
     }
 }

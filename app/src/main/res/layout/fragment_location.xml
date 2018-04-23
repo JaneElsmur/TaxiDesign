@@ -5,8 +5,9 @@
               android:layout_height="wrap_content"
               tools:context=".fragments.FragmentLocation"
               android:orientation="horizontal"
+              android:background="@drawable/custom_ripple"
               android:clickable="true"
-              android:id="@+id/fromButton">
+              android:id="@+id/location_layout_button">
 
     <ImageView
             android:layout_width="10dp"

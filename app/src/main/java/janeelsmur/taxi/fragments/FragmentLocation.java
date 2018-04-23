@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import janeelsmur.taxi.DialogEnterAddressWhenChosen;
 import janeelsmur.taxi.EnterLocationActivity;
 import janeelsmur.taxi.R;
 
@@ -18,9 +19,9 @@ public class FragmentLocation extends Fragment implements View.OnClickListener {
     public static final int MODE_WHERE = 1;
 
     //Сохраняемые значения
-    int id;
-    int mode;
-    String location;
+    private int id;
+    private int mode;
+    private String location;
 
     //Выставление формы локации. Откуда или Куда
     public static FragmentLocation newInstance(int mode, @Nullable String location, int id) {
@@ -34,7 +35,6 @@ public class FragmentLocation extends Fragment implements View.OnClickListener {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class FragmentLocation extends Fragment implements View.OnClickListener {
                 break;
         }
 
-        view.findViewById(R.id.fromButton).setOnClickListener(this);
+        view.findViewById(R.id.location_layout_button).setOnClickListener(this);
         return view;
     }
 
@@ -74,10 +74,28 @@ public class FragmentLocation extends Fragment implements View.OnClickListener {
 
         intent.putExtra("id", id);
         intent.putExtra("mode", mode);
-        if(location != null) intent.putExtra("location", location);
+        if (location != null) intent.putExtra("location", location);
 
         startActivity(intent);
     }
+
+    /** Геттер id'шника */
+    public int getLocationId() {
+        return id;
+    }
+
+    /** Геттер режима. 0 - откуда
+     *                 1 - куда
+     */
+    public int getMode() {
+        return mode;
+    }
+
+    /** Геттер записанной локации. null, если нет */
+    public String getLoacation() {
+        return location;
+    }
+
 }
 
 

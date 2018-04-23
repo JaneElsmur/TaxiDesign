@@ -30,21 +30,10 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
 
     //Данные для отображения в TextView
     private String finalInf;
-    private String finalTimeInf;
-    private String date;
-    private String minuts;
-    private int hours;
 
     //Отображаемые значения в минутом пикере
     private final String[] displayedTimeValues = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
     private final String[] displayedDateValues = new String[7];
-
-    //Сохраняемые данные
-    private final short DATA_INDEX = 0;
-    private final short HOURS_INDEX = 1;
-    private final short MINUTES_INDEX = 2;
-    private final int EMPTY = 555;
-    private final int[] timeValues_DataBaseValue = {EMPTY, EMPTY, EMPTY};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -218,18 +207,12 @@ public class DialogTime extends DialogFragment implements View.OnClickListener {
         pickValues[0] = datePicker.getValue();
         pickValues[1] = hourPicker.getValue();
         pickValues[2] = minutePicker.getValue();
-        sharedPrefManager.saveTime(pickValues, asSoonAsPossible.isChecked());
-        //timeValues_DataBaseValue[DATA_INDEX] = datePicker.getValue();
-        //timeValues_DataBaseValue[HOURS_INDEX] = hourPicker.getValue();
-        //timeValues_DataBaseValue[MINUTES_INDEX] = minutePicker.getValue();
+        sharedPrefManager.saveTime(pickValues, asSoonAsPossible.isChecked(), finalInf);
     }
 
     //Выставляет в пикерах введенные до этого значения
     private void loadData() {
         int[] pickValues = sharedPrefManager.getSavedTime();
-        //datePicker.setValue(timeValues_DataBaseValue[DATA_INDEX]);
-        //hourPicker.setValue(timeValues_DataBaseValue[HOURS_INDEX]);
-        //minutePicker.setValue(timeValues_DataBaseValue[MINUTES_INDEX]);
         datePicker.setValue(pickValues[0]);
         hourPicker.setValue(pickValues[1]);
         minutePicker.setValue(pickValues[2]);

@@ -89,13 +89,6 @@ public class MainActivity extends AppCompatActivity
                 transaction.replace(R.id.container, profile);
             }
 
-        } else if (id == R.id.favorite_addresses) {
-
-            if (getSupportFragmentManager().findFragmentById(R.id.container) != underConstruction) {
-                toolbar.setTitle(R.string.favorite_addresses);
-                transaction.replace(R.id.container, underConstruction);
-            }
-
         } else if (id == R.id.bank_card) {
 
             if (getSupportFragmentManager().findFragmentById(R.id.container) != underConstruction) {

@@ -7,18 +7,23 @@
               android:orientation="vertical"
               tools:context="janeelsmur.taxi.DialogTariff">
 
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
     <TextView
             android:text="@string/tariff_information"
             android:layout_width="264dp"
-            android:layout_height="95dp"
+            android:layout_height="wrap_content"
             android:id="@+id/tariff_text"
             android:textAlignment="center"
             android:textSize="14sp"
-            android:fontFamily="monospace"
             android:gravity="center"
             android:lineSpacingExtra="0sp"
-            />
+    />
 
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -30,39 +35,39 @@
             android:layout_height="match_parent" android:checkedButton="@+id/radioButtonTariff1">
         <RadioButton
                 android:layout_gravity="center"
-                android:text="Тариф 1"
+                android:text="@string/tariff_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButtonTariff1"
                 android:layout_weight="1"
                 android:checked="false"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
                 android:textAlignment="center"
         />
         <RadioButton
                 android:layout_gravity="center"
-                android:text="Тариф 2"
+                android:text="@string/tariff_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButtonTariff2"
                 android:layout_weight="1"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
         />
         <RadioButton
                 android:layout_gravity="center"
-                android:text="Тариф 3"
+                android:text="@string/tariff_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButtonTariff3"
-                android:fontFamily="monospace" android:layout_weight="1"/>
+                android:fontFamily="sans-serif" android:layout_weight="1"/>
         <RadioButton
                 android:layout_gravity="center"
-                android:text="Тариф 4"
+                android:text="@string/tariff_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButtonTariff4"
                 android:layout_weight="1"
-                android:fontFamily="monospace"/>
+                android:fontFamily="sans-serif"/>
     </RadioGroup>
 
     <LinearLayout
